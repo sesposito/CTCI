@@ -1,4 +1,3 @@
-(function(){
 function hasUniqueCharsSync(str){
   
   var seenChars = {};
@@ -53,4 +52,3 @@ hasUniqueChars(str2, function(err, result){
   console.log(result);  
 });
 
-})();
