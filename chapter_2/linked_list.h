@@ -29,4 +29,7 @@ void list_print_kth_to_last(list l, int k);
 void list_move_node(list l, list_node moving, list_node position);
 void list_partition_under_value(list l, int value);
 void list_add(list l1, list l2);
+void list_add_reverse(list l1, list l2);
+void list_detect_loop(list l);
+void list_is_palindrome(list l);
 

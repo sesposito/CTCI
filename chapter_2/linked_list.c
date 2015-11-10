@@ -345,14 +345,65 @@ void list_add_reverse(list l1, list l2){
 
 }
 
+void list_detect_loop(list l){
+  
+  list_node current;
+  list_node seen_nodes[100];
+  int i, n_seen_nodes;
+  bool match_found;
+
+  n_seen_nodes = 0;
+  current = l->head;
+  while(current != NULL){
+    match_found = false;
+    for(i = 0; i < n_seen_nodes; i++){
+      if(current == seen_nodes[i]){
+        match_found = true;
+        printf("Was found loop at node with value: %d\n", current->value);
+        return;
+      } 
+    }
+    if(match_found == false){
+      seen_nodes[n_seen_nodes] = current;   
+    }
+    n_seen_nodes++;
+    current = current->next;
+  } 
+  
+  printf("No loop was found\n");
+}
+
+void list_is_palindrome(list l){
+  
+  int seen_count;
+  int stop_value;
+  list_node left;
+  list_node right;
+
+  stop_value = (l->size / 2);
+  left = l->head;
+  right = l->tail; 
+  for(seen_count = 0; seen_count < stop_value; seen_count++){
+
+    if(left->value == right->value){
+      left = left->next;
+      right = right->prev;
+      continue;
+    }else{
+      printf("The list is not a palindrome\n");
+      return;
+    }
+  }
+  printf("The list is a palindrome\n");
+}
+
 
 int main() {
 
+  /*
   list l1 = list_create();
   list l2 = list_create();
   list_node n;
-
-  n = NULL;
 
   list_append(l1, 7);
   list_append(l1, 1);
@@ -363,29 +414,21 @@ int main() {
   list_append(l2, 2);
 
   list_add_reverse(l1, l2);
+  */
 
-  /*
+  list l;
+  /*list_node node1, node2;*/
+
+  l = list_create();
+
   list_append(l, 1);
   list_append(l, 2);
   list_append(l, 3);
-  list_append(l, 4);
-  list_append(l, 5);
-  list_append(l, 6);
-  list_append(l, 7);
-  list_append(l, 8);
   list_append(l, 3);
-  list_append(l, 9);
+  list_append(l, 2);
   list_append(l, 1);
-  list_append(l, 8);
-  list_append(l, 7);
-  list_append(l, 3);
-  list_append(l, 5);
   list_print(l);
-  list_rm_dup(l);
-  list_print(l);
-  list_print_kth_to_last(l, 5);
-  list_partition_under_value(l, 7);
-  list_print(l);*/
+  list_is_palindrome(l);
 
   return 0;
 
